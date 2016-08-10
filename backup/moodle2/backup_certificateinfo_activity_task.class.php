@@ -15,9 +15,9 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Defines backup_newmodule_activity_task class
+ * Defines backup_certificateinfo_activity_task class
  *
- * @package   mod_newmodule
+ * @package   mod_certificateinfo
  * @category  backup
  * @copyright 2016 Your Name <your@email.address>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -25,17 +25,17 @@
 
 defined('MOODLE_INTERNAL') || die;
 
-require_once($CFG->dirroot . '/mod/newmodule/backup/moodle2/backup_newmodule_stepslib.php');
+require_once($CFG->dirroot . '/mod/certificateinfo/backup/moodle2/backup_certificateinfo_stepslib.php');
 
 /**
- * Provides the steps to perform one complete backup of the newmodule instance
+ * Provides the steps to perform one complete backup of the certificateinfo instance
  *
- * @package   mod_newmodule
+ * @package   mod_certificateinfo
  * @category  backup
  * @copyright 2016 Your Name <your@email.address>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class backup_newmodule_activity_task extends backup_activity_task {
+class backup_certificateinfo_activity_task extends backup_activity_task {
 
     /**
      * No specific settings for this activity
@@ -44,10 +44,10 @@ class backup_newmodule_activity_task extends backup_activity_task {
     }
 
     /**
-     * Defines a backup step to store the instance data in the newmodule.xml file
+     * Defines a backup step to store the instance data in the certificateinfo.xml file
      */
     protected function define_my_steps() {
-        $this->add_step(new backup_newmodule_activity_structure_step('newmodule_structure', 'newmodule.xml'));
+        $this->add_step(new backup_certificateinfo_activity_structure_step('certificateinfo_structure', 'certificateinfo.xml'));
     }
 
     /**
@@ -61,13 +61,13 @@ class backup_newmodule_activity_task extends backup_activity_task {
 
         $base = preg_quote($CFG->wwwroot, '/');
 
-        // Link to the list of newmodules.
-        $search = '/('.$base.'\/mod\/newmodule\/index.php\?id\=)([0-9]+)/';
-        $content = preg_replace($search, '$@NEWMODULEINDEX*$2@$', $content);
+        // Link to the list of certificateinfos.
+        $search = '/('.$base.'\/mod\/certificateinfo\/index.php\?id\=)([0-9]+)/';
+        $content = preg_replace($search, '$@certificateinfoINDEX*$2@$', $content);
 
-        // Link to newmodule view by moduleid.
-        $search = '/('.$base.'\/mod\/newmodule\/view.php\?id\=)([0-9]+)/';
-        $content = preg_replace($search, '$@NEWMODULEVIEWBYID*$2@$', $content);
+        // Link to certificateinfo view by moduleid.
+        $search = '/('.$base.'\/mod\/certificateinfo\/view.php\?id\=)([0-9]+)/';
+        $content = preg_replace($search, '$@certificateinfoVIEWBYID*$2@$', $content);
 
         return $content;
     }
